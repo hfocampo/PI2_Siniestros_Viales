@@ -1,0 +1,35 @@
+let
+     Obtiene la fecha mínima y máxima de todas las tablas relevantes
+    MinFechaHomicidios = List.Min(hechos_homicidios[FECHA]),
+    MaxFechaHomicidios = List.Max(hechos_homicidios[FECHA]),
+    MinFechaLesiones = List.Min(hechos_lesiones[FECHA]),
+    MaxFechaLesiones = List.Max(hechos_lesiones[FECHA]),
+    GlobalMinFecha = List.Min({MinFechaHomicidios, MinFechaLesiones}),
+    GlobalMaxFecha = List.Max({MaxFechaHomicidios, MaxFechaLesiones}),
+    
+     Crea una lista de fechas basada en el rango global de fechas
+    ListadoDeFechas = List.Dates(GlobalMinFecha, Number.From(GlobalMaxFecha - GlobalMinFecha) + 1, #duration(1, 0, 0, 0)),
+    ConvertirATabla = Table.FromList(ListadoDeFechas, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    RenombrarColumnas = Table.RenameColumns(ConvertirATabla,{{Column1, Fecha}}),
+    CambiarTipo = Table.TransformColumnTypes(RenombrarColumnas,{{Fecha, type date}}),
+    
+     Agrega características adicionales a la tabla
+    AgregarAño = Table.AddColumn(CambiarTipo, Año, each Date.Year([Fecha]), Int64.Type),
+    AgregarMes = Table.AddColumn(AgregarAño, Mes, each Date.Month([Fecha]), Int64.Type),
+    AgregarNombreMes = Table.AddColumn(AgregarMes, Nombre del Mes, each Date.MonthName([Fecha])),
+    AgregarDia = Table.AddColumn(AgregarNombreMes, Día, each Date.Day([Fecha]), Int64.Type),
+    AgregarNombreDelDia = Table.AddColumn(AgregarDia, Nombre del Día, each Date.DayOfWeekName([Fecha])),
+    AgregarDiaDeLaSemana = Table.AddColumn(AgregarNombreDelDia, Día de la Semana, each Date.DayOfWeek([Fecha]) + 1, Int64.Type),
+    AgregarNumeroDeSemana = Table.AddColumn(AgregarDiaDeLaSemana, Número de Semana del Año, each Date.WeekOfYear([Fecha]), Int64.Type),
+    AgregarSemanaDelMes = Table.AddColumn(AgregarNumeroDeSemana, Semana del Mes, each Date.WeekOfMonth([Fecha])),
+    AgregarCuarto = Table.AddColumn(AgregarSemanaDelMes, Cuarto, each Date.QuarterOfYear([Fecha])),
+    AgregarSemestre = Table.AddColumn(AgregarCuarto, Semestre, each if [Mes] = 6 then 1 else 2),
+    AgregarTipoDeDia = Table.AddColumn(AgregarSemestre, Tipo de Día, each if [Día de la Semana] = 6 then Fin de Semana else Día de Semana),
+    AgregarEsLaborable = Table.AddColumn(AgregarTipoDeDia, Es Laborable, each if [Tipo de Día] = Día de Semana then Sí else No),
+    AgregarInicioDeMes = Table.AddColumn(AgregarEsLaborable, Inicio de Mes, each Date.StartOfMonth([Fecha]), type date),
+    AgregarFinDeMes = Table.AddColumn(AgregarInicioDeMes, Fin de Mes, each Date.EndOfMonth([Fecha]), type date),
+    
+     Formatear columnas
+    CambiarTipoDeDatos = Table.TransformColumnTypes(AgregarFinDeMes,{{Año, Int64.Type}, {Mes, Int64.Type}, {Día, Int64.Type}, {Número de Semana del Año, Int64.Type}, {Semana del Mes, Int64.Type}, {Cuarto, Int64.Type}, {Semestre, Int64.Type}, {Día de la Semana, Int64.Type}, {Tipo de Día, type text}, {Es Laborable, type text}})
+in
+    CambiarTipoDeDatos
