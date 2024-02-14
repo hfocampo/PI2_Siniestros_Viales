@@ -133,24 +133,27 @@ Se realizó un análisis exploratorio de los datos con algunos de siguientes res
 ### KPI 2 y 3
 
 - KPI 2 - Reducir en un 7% la cantidad de accidentes mortales de motociclistas en el último año, respecto al año anterior.
-- KPI 3 - Reducir en un 10% la cantidad de accidentes mortales de peatones en el último año, respecto al año anterior
+- KPI 3 - Reducir en un 12% la cantidad de accidentes mortales de peatones mayores a 60 años en el último año, respecto al año 2019.
 
 <p align="center">
   <img src="images/kpi2-3.png" width="800" alt="Texto alternativo si la imagen no carga">
 </p>
 
 - Los accidentes mortales en moto pasaron de  28 a 46 del 2020 al 2021, con un incremento del 64,29%, no cumpliendo la meta de reducción del    7%. 
-- Se ve un incremento significativo mes a mes en el 2021 respecto al 2020, en parte por cuenta de la pandemia, en la cual varios meses del     año y por restricción de movilidad la accidentalidad bajó bastante.
+- Se ve un incremento significativo mes a mes en el 2021 respecto al 2020, en parte por cuenta de la pandemia, en la cual varios meses del      año y por restricción de movilidad la accidentalidad bajó bastante.
 - Los accidentes mortales en peatones pasaron de  34 a 33 en los años 2020-2021, con una reducción del 2,94%.
   Esta reducción parece significativa, pero realmente es baja teniendo en cuenta que la movilidad en el año 2020 fue reducida y por ende la accidentalidad.
-
+- Los accidentes mortales en peatones en esta categoría pasaron de  20 a 18 en los años 2019-2021, con una reducción del 10,0 %.
+  Esta reducción parece significativa, pero es necesario implementar planes de mitigación para los dos grupos focales, conductores y peatones.
 
 ## CONCLUSIONES
 
 - Se recomienda generar planes de mitigación y prevención vial tanto en peatones como en conductores, esto porque la distribución de muertes  por edad es uniforme, en edades, lo que indica que posiblemente haya que trabajar un poco más la cultura vial.
 - Se recomienda hacer campañas viales y se preservación de la vida que motiven a los motociclistas al cuidado en la vía, esto porque este  segmento de conductores con los más afectados en los siniestros viales. 
+- Se sugiere mejorar la señalización vial para apoyo a mayores de 60 años, pues es un grupo vulnerable en vías sobre todo de alto tráfico 
 
 
 ## Contacto
-- [Portafolio]()
+- Héctor Ocampo Gaviria
+- [Portafolio](https://github.com/hfocampo/PI2_Siniestros_Viales.git)
 - [hector.ocampog@gmail.com]
